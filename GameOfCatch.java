@@ -1,12 +1,22 @@
 
 public class GameOfCatch {
 
+	//Wh not implement a singleton pattern?
 	private static GameOfCatch mInstance;
-	
 	private GameOfCatch() {}
-	
-	private class IntError extends Throwable
+
+	//We could have made add a static function but we're not being practical to start with anyway.
+	public static GameOfCatch getInstance()
 	{
+		if(mInstance == null)
+			mInstance = new GameOfCatch();
+		return mInstance;
+	}
+	
+	//Internal-use error. In a more practical use-case you'd define this elsewhere.
+	public class IntError extends Throwable
+	{
+		//All it is, is acontainer for an int.
 		public int mInt;
 		
 		public IntError(int aInt)
@@ -15,25 +25,21 @@ public class GameOfCatch {
 		}
 	}
 	
+	//Add A+B then throw the sum.
 	public void add(int a, int b) throws IntError {
 		throw new GameOfCatch.IntError(a+b);
 	}
 	
-	public static GameOfCatch getInstance()
-	{
-		if(mInstance == null)
-			mInstance = new GameOfCatch();
-		return mInstance;
-	}
-	
+	//Main function, hooray!
 	public static void main(String[] args) {
 		try
 		{
+			//We run our add function
 			GameOfCatch.getInstance().add(1, 2);
 		}
-		catch(IntError error)
+		catch(IntError error) //We catch an IntError
 		{
-			System.out.println(error);
+			System.out.println(error.mint); //We print our 'error'
 		}
 
 	}
