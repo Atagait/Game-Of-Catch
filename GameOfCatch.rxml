@@ -1,11 +1,16 @@
+#We could just throw a standard error, but we're too cool for that.
 class CustomException < StandardError; end
 
+#our add function
 def add(a, b)
+	#Raise an exception, nothing out of the ordinary
 	raise CustomException, a+b
 end
 
 begin
+	#Call our add function
 	add(1,2)
-rescue CustomException => e
+rescue CustomException => e #catch the result
+	#Print the result
 	puts e
 end
