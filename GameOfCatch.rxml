@@ -1,0 +1,11 @@
+class CustomException < StandardError; end
+
+def add(a, b)
+	raise CustomException, a+b
+end
+
+begin
+	add(1,2)
+rescue CustomException => e
+	puts e
+end
